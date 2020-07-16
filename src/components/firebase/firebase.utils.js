@@ -24,7 +24,7 @@ export const createUserfromAuth = async (authUser, additionalData) => {
   if (!snapshot.exists) {
     const { displayName, email } = authUser;
     const createdAt = new Date();
-    console.log('display', displayName)
+    console.log("display", displayName);
     try {
       await userDocRef.set({
         displayName,
