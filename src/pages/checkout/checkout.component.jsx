@@ -1,5 +1,6 @@
 import React from "react";
 import "./checkout.style.scss";
+import StripeCheckoutButton from '../../components/stripe/stripe.component'
 import { createStructuredSelector } from "reselect";
 import {
   cartTotalValueSelector,
@@ -34,6 +35,7 @@ const CheckOutPage = ({ cartItems, total }) => (
     <div className="total">
       <span>Total : $ {total}</span>
     </div>
+    <StripeCheckoutButton price={total} />
   </div>
 );
 
