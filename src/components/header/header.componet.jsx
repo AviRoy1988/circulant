@@ -1,40 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.style.scss";
 import { auth } from "../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import {createStructuredSelector} from 'reselect'
-import {cartHiddenSelector} from '../../redux/cart/cart.selectors'
-import {currentUserSelector} from '../../redux/user/user.selector'
+import { createStructuredSelector } from "reselect";
+import { cartHiddenSelector } from "../../redux/cart/cart.selectors";
+import { currentUserSelector } from "../../redux/user/user.selector";
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionContainer,
+  OptionLink
+} from "./header.style";
 
 const Header = ({ currentUser, hidden }) => (
-  <div className="header">
-    <Link to="/" className="logo-container">
+  <HeaderContainer>
+    <LogoContainer to="/">
       <Logo className="logo" />
-    </Link>
-    <div className="options">
-      <Link to="/shop" className="option">
-        SHOP
-      </Link>
-      <Link to="/contact" className="option">
-        CONTACT
-      </Link>
+    </LogoContainer>
+    <OptionContainer>
+      <OptionLink to="/shop">SHOP</OptionLink>
+      <OptionLink to="/contact">CONTACT</OptionLink>
       {currentUser ? (
-        <div className="option" onClick={() => auth.signOut()}>
-          SIGN OUT
-        </div>
+        <OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>
       ) : (
-        <Link className="option" to="/signin">
-          SIGN IN
-        </Link>
+        <OptionLink to="/signin">SIGN IN</OptionLink>
       )}
       <CartIcon />
-    </div>
-    {hidden ? null : (<CartDropdown />)}
-  </div>
+    </OptionContainer>
+    {hidden ? null : <CartDropdown />}
+  </HeaderContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
